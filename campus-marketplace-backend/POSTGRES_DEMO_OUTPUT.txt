@@ -1,0 +1,235 @@
+﻿
+========================================================================
+PostgreSQL Database Tables
+========================================================================
+Tables in campus_marketplace:
+[
+  {
+    "table_name": "admin_actions"
+  },
+  {
+    "table_name": "categories"
+  },
+  {
+    "table_name": "inquiries"
+  },
+  {
+    "table_name": "listings"
+  },
+  {
+    "table_name": "users"
+  }
+]
+
+========================================================================
+1. Register User
+========================================================================
+API status 201 response:
+{
+  "user": {
+    "created_at": "Mon, 20 Jul 2026 14:36:34 GMT",
+    "email": "video.postgres.1784576194@example.edu",
+    "name": "Video PostgreSQL Student",
+    "role": "student",
+    "status": "active",
+    "user_id": 6
+  }
+}
+Database evidence from users table:
+[
+  {
+    "user_id": 6,
+    "name": "Video PostgreSQL Student",
+    "email": "video.postgres.1784576194@example.edu",
+    "role": "student",
+    "status": "active"
+  }
+]
+
+========================================================================
+2. Create Listing
+========================================================================
+API status 201 response:
+{
+  "listing": {
+    "category": "Electronics",
+    "category_id": 3,
+    "condition": "Good",
+    "created_at": "Mon, 20 Jul 2026 14:36:34 GMT",
+    "description": "Created through Flask API for the video demo.",
+    "image_url": null,
+    "listing_id": 7,
+    "price": 85.0,
+    "seller_id": 6,
+    "seller_name": "Video PostgreSQL Student",
+    "status": "Available",
+    "title": "PostgreSQL Video Monitor",
+    "updated_at": "Mon, 20 Jul 2026 14:36:34 GMT"
+  }
+}
+Database evidence from listings table:
+[
+  {
+    "listing_id": 7,
+    "title": "PostgreSQL Video Monitor",
+    "price": "85.00",
+    "status": "Available",
+    "seller_id": 6
+  }
+]
+
+========================================================================
+3. Search Listing
+========================================================================
+API status 200 response:
+{
+  "listings": [
+    {
+      "category": "Electronics",
+      "category_id": 3,
+      "condition": "Good",
+      "created_at": "Mon, 20 Jul 2026 14:36:34 GMT",
+      "description": "Created through Flask API for the video demo.",
+      "image_url": null,
+      "listing_id": 7,
+      "price": 85.0,
+      "seller_id": 6,
+      "seller_name": "Video PostgreSQL Student",
+      "status": "Available",
+      "title": "PostgreSQL Video Monitor",
+      "updated_at": "Mon, 20 Jul 2026 14:36:34 GMT"
+    }
+  ]
+}
+Database evidence: matching row exists:
+[
+  {
+    "listing_id": 7,
+    "title": "PostgreSQL Video Monitor",
+    "status": "Available"
+  }
+]
+
+========================================================================
+4. Update Listing Status
+========================================================================
+API status 200 response:
+{
+  "listing": {
+    "category": "Electronics",
+    "category_id": 3,
+    "condition": "Good",
+    "created_at": "Mon, 20 Jul 2026 14:36:34 GMT",
+    "description": "Created through Flask API for the video demo.",
+    "image_url": null,
+    "listing_id": 7,
+    "price": 85.0,
+    "seller_id": 6,
+    "seller_name": "Video PostgreSQL Student",
+    "status": "Pending",
+    "title": "PostgreSQL Video Monitor",
+    "updated_at": "Mon, 20 Jul 2026 14:36:34 GMT"
+  }
+}
+Database evidence from listings table:
+[
+  {
+    "listing_id": 7,
+    "title": "PostgreSQL Video Monitor",
+    "status": "Pending"
+  }
+]
+
+========================================================================
+5. Create Inquiry
+========================================================================
+API status 201 response:
+{
+  "inquiry": {
+    "buyer_id": 1,
+    "created_at": "Mon, 20 Jul 2026 14:36:34 GMT",
+    "inquiry_id": 3,
+    "listing_id": 7,
+    "message": "Is this still available?"
+  }
+}
+Database evidence from inquiries table:
+[
+  {
+    "inquiry_id": 3,
+    "listing_id": 7,
+    "buyer_id": 1,
+    "message": "Is this still available?"
+  }
+]
+
+========================================================================
+6. Remove Listing
+========================================================================
+API status 200 response:
+{
+  "listing_id": 7,
+  "message": "Listing removed"
+}
+Database evidence from listings table:
+[
+  {
+    "listing_id": 7,
+    "title": "PostgreSQL Video Monitor",
+    "status": "Removed"
+  }
+]
+
+========================================================================
+7. Admin Dashboard
+========================================================================
+API status 200 response:
+{
+  "listings_by_category": [
+    {
+      "category": "Electronics",
+      "listing_count": 4
+    },
+    {
+      "category": "Furniture",
+      "listing_count": 1
+    },
+    {
+      "category": "Kitchen",
+      "listing_count": 1
+    },
+    {
+      "category": "Textbooks",
+      "listing_count": 1
+    },
+    {
+      "category": "Transportation",
+      "listing_count": 0
+    }
+  ],
+  "metrics": {
+    "active_listings": 3,
+    "pending_review": 1,
+    "sold_listings": 1,
+    "total_users": 6
+  }
+}
+Database evidence grouped by status:
+[
+  {
+    "status": "Available",
+    "count": 2
+  },
+  {
+    "status": "Pending",
+    "count": 1
+  },
+  {
+    "status": "Removed",
+    "count": 3
+  },
+  {
+    "status": "Sold",
+    "count": 1
+  }
+]
