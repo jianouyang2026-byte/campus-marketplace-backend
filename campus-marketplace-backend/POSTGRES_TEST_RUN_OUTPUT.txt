@@ -1,8 +1,0 @@
-﻿PASS - Register user in PostgreSQL
-PASS - Create listing in PostgreSQL
-PASS - Search listings from PostgreSQL
-PASS - Update listing status in PostgreSQL
-PASS - Create inquiry in PostgreSQL
-PASS - Remove listing in PostgreSQL
-PASS - Admin dashboard from PostgreSQL
-Result: 7/7 PostgreSQL API tests passed

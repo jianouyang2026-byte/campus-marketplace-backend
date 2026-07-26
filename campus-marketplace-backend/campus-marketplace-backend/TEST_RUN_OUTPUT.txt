@@ -1,8 +1,0 @@
-﻿PASS - Register user
-PASS - Create listing
-PASS - Search listings
-PASS - Update listing status
-PASS - Create inquiry
-PASS - Remove listing
-PASS - Admin dashboard
-Result: 7/7 tests passed
